@@ -3,649 +3,1525 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Grau Motos</title>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@400;600;700&family=Barlow:wght@300;400;500&display=swap" rel="stylesheet">
+<title>Grau Motos | Oficina Especializada em Motos em São Paulo</title>
+<meta name="description" content="Grau Motos — oficina especializada em revisão, manutenção, elétrica, customização e preparação de motos em São Paulo. Mais de 12 anos de experiência. Agende seu serviço.">
+<meta name="keywords" content="oficina de motos, mecânica de motos, revisão de motos, manutenção de motos, conserto de motos, elétrica para motos, customização de motos, oficina especializada motos São Paulo">
+<meta name="robots" content="index, follow">
+<meta property="og:title" content="Grau Motos | Oficina Especializada em Motos em São Paulo">
+<meta property="og:description" content="Revisão, manutenção, elétrica e customização de motos. Mais de 12 anos atendendo pilotos em São Paulo.">
+<meta property="og:type" content="website">
+<link rel="canonical" href="https://graumotos.com.br/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:ital,wght@0,400;0,600;0,700;1,400&family=Barlow:ital,wght@0,300;0,400;0,500;0,600;1,300&display=swap" rel="stylesheet">
+
 <style>
-  :root {
-    --black: #0a0a0a;
-    --dark: #111111;
-    --card: #181818;
-    --orange: #FF4D00;
-    --orange2: #FF7A1A;
-    --white: #f0ece4;
-    --gray: #888;
-    --border: #2a2a2a;
-  }
+/* ═══════════════════════════════════════
+   TOKENS & RESET
+═══════════════════════════════════════ */
+:root {
+  --black:   #080808;
+  --dark:    #101010;
+  --card:    #161616;
+  --card2:   #1c1c1c;
+  --orange:  #E8430A;
+  --orange2: #FF6B2B;
+  --amber:   #F59E0B;
+  --white:   #F2EDE4;
+  --muted:   rgba(242,237,228,0.55);
+  --border:  rgba(255,255,255,0.07);
+  --border2: rgba(232,67,10,0.3);
+  --radius:  3px;
+  --nav-h:   72px;
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;font-size:16px}
+body{
+  background:var(--black);
+  color:var(--white);
+  font-family:'Barlow',sans-serif;
+  font-weight:400;
+  line-height:1.6;
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+}
+img{max-width:100%;display:block}
+a{text-decoration:none;color:inherit}
+button{font-family:inherit;cursor:pointer;border:none;background:none}
+ul{list-style:none}
 
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  html { scroll-behavior: smooth; }
+/* ═══════════════════════════════════════
+   PAGES SYSTEM
+═══════════════════════════════════════ */
+.page{display:none}
+.page.active{display:block}
 
-  body {
-    background: var(--black);
-    color: var(--white);
-    font-family: 'Barlow', sans-serif;
-    overflow-x: hidden;
-  }
+/* ═══════════════════════════════════════
+   UTILITIES
+═══════════════════════════════════════ */
+.container{max-width:1200px;margin:0 auto;padding:0 24px}
+.tag{
+  display:inline-flex;align-items:center;gap:8px;
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:11px;font-weight:700;letter-spacing:4px;text-transform:uppercase;
+  color:var(--orange);
+}
+.tag::before{content:'';width:18px;height:2px;background:var(--orange)}
+.section-title{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(44px,6vw,80px);
+  letter-spacing:1px;line-height:.95;
+  color:var(--white);
+}
+.section-title span{color:var(--orange)}
+.divider{width:52px;height:3px;background:linear-gradient(90deg,var(--orange),transparent);margin:20px 0 32px}
 
-  /* ── NAV ── */
-  nav {
-    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-    display: flex; align-items: center; justify-content: space-between;
-    padding: 18px 48px;
-    background: rgba(10,10,10,0.85);
-    backdrop-filter: blur(12px);
-    border-bottom: 1px solid var(--border);
-  }
-  .logo {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 28px;
-    letter-spacing: 4px;
-    color: var(--white);
-    display: flex; align-items: center; gap: 10px;
-  }
-  .logo span { color: var(--orange); }
-  .logo svg { width: 32px; height: 32px; fill: var(--orange); }
-  .nav-links { display: flex; gap: 36px; }
-  .nav-links a {
-    font-family: 'Barlow Condensed', sans-serif;
-    font-size: 14px; font-weight: 600;
-    letter-spacing: 2px; text-transform: uppercase;
-    color: var(--gray); text-decoration: none;
-    transition: color .2s;
-  }
-  .nav-links a:hover { color: var(--orange); }
+/* Reveal */
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .65s ease,transform .65s ease}
+.reveal.up{transform:translateY(28px)}
+.reveal.left{transform:translateX(-28px)}
+.reveal.right{transform:translateX(28px)}
+.reveal.visible{opacity:1;transform:translate(0)}
 
-  /* ── HERO ── */
-  .hero {
-    height: 100vh;
-    display: flex; align-items: center;
-    position: relative; overflow: hidden;
-    padding: 0 48px;
-  }
-  .hero-bg {
-    position: absolute; inset: 0;
-    background:
-      radial-gradient(ellipse 80% 60% at 70% 50%, rgba(255,77,0,0.12) 0%, transparent 70%),
-      repeating-linear-gradient(
-        90deg,
-        transparent,
-        transparent 80px,
-        rgba(255,255,255,0.018) 80px,
-        rgba(255,255,255,0.018) 81px
-      ),
-      repeating-linear-gradient(
-        0deg,
-        transparent,
-        transparent 80px,
-        rgba(255,255,255,0.018) 80px,
-        rgba(255,255,255,0.018) 81px
-      ),
-      var(--black);
-  }
-  .hero-content { position: relative; z-index: 2; max-width: 680px; }
-  .hero-badge {
-    display: inline-flex; align-items: center; gap: 8px;
-    background: rgba(255,77,0,0.15); border: 1px solid rgba(255,77,0,0.35);
-    border-radius: 2px; padding: 6px 14px;
-    font-family: 'Barlow Condensed', sans-serif;
-    font-size: 12px; letter-spacing: 3px; text-transform: uppercase;
-    color: var(--orange); margin-bottom: 24px;
-  }
-  .hero-badge::before {
-    content: ''; width: 6px; height: 6px; border-radius: 50%;
-    background: var(--orange); animation: pulse 1.5s infinite;
-  }
-  @keyframes pulse {
-    0%,100%{opacity:1; transform:scale(1)}
-    50%{opacity:.4; transform:scale(1.5)}
-  }
-  .hero h1 {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: clamp(72px, 9vw, 130px);
-    line-height: .92;
-    letter-spacing: 2px;
-    color: var(--white);
-  }
-  .hero h1 em {
-    font-style: normal; color: var(--orange);
-  }
-  .hero p {
-    margin-top: 24px;
-    font-size: 17px; font-weight: 300; line-height: 1.7;
-    color: rgba(240,236,228,0.6); max-width: 480px;
-  }
-  .hero-cta {
-    margin-top: 40px; display: flex; gap: 16px; flex-wrap: wrap;
-  }
-  .btn-primary {
-    display: inline-flex; align-items: center; gap: 10px;
-    background: var(--orange); color: #000;
-    font-family: 'Barlow Condensed', sans-serif;
-    font-size: 14px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase;
-    padding: 14px 32px; text-decoration: none;
-    clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 12px 100%, 0 calc(100% - 12px));
-    transition: background .2s, transform .2s;
-  }
-  .btn-primary:hover { background: var(--orange2); transform: translateY(-2px); }
-  .btn-outline {
-    display: inline-flex; align-items: center; gap: 10px;
-    border: 1px solid var(--border); color: var(--white);
-    font-family: 'Barlow Condensed', sans-serif;
-    font-size: 14px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase;
-    padding: 14px 32px; text-decoration: none;
-    transition: border-color .2s, color .2s;
-  }
-  .btn-outline:hover { border-color: var(--orange); color: var(--orange); }
+/* Buttons */
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:10px;
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:13px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;
+  padding:15px 34px;
+  transition:all .22s ease;
+  white-space:nowrap;
+}
+.btn-primary{
+  background:var(--orange);color:#fff;
+  clip-path:polygon(0 0,calc(100% - 10px) 0,100% 10px,100% 100%,10px 100%,0 calc(100% - 10px));
+}
+.btn-primary:hover{background:var(--orange2);transform:translateY(-2px)}
+.btn-outline{
+  border:1px solid rgba(255,255,255,0.2);color:var(--white);
+}
+.btn-outline:hover{border-color:var(--orange);color:var(--orange)}
+.btn-ghost{color:var(--orange);padding:0;font-size:13px;letter-spacing:1.5px}
+.btn-ghost svg{transition:transform .2s}
+.btn-ghost:hover svg{transform:translateX(4px)}
+.btn-wpp{
+  background:#25D366;color:#fff;
+  clip-path:polygon(0 0,calc(100% - 10px) 0,100% 10px,100% 100%,10px 100%,0 calc(100% - 10px));
+}
+.btn-wpp:hover{background:#1db954;transform:translateY(-2px)}
 
-  .hero-moto {
-    position: absolute; right: -40px; bottom: 0;
-    width: 55%; max-width: 820px; z-index: 1;
-    opacity: .85;
-  }
-  .hero-moto svg { width: 100%; }
+/* ═══════════════════════════════════════
+   NAV
+═══════════════════════════════════════ */
+.nav{
+  position:fixed;top:0;left:0;right:0;z-index:200;
+  height:var(--nav-h);
+  display:flex;align-items:center;
+  background:rgba(8,8,8,0.92);
+  backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--border);
+  transition:background .3s;
+}
+.nav-inner{
+  width:100%;max-width:1360px;margin:0 auto;padding:0 32px;
+  display:flex;align-items:center;justify-content:space-between;
+}
+.nav-logo{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:26px;letter-spacing:5px;
+  display:flex;align-items:center;gap:10px;
+  cursor:pointer;
+}
+.nav-logo span{color:var(--orange)}
+.nav-logo svg{width:30px;height:30px}
+.nav-links{display:flex;align-items:center;gap:10px}
+.nav-links a{
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:12px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;
+  color:var(--muted);padding:8px 14px;
+  transition:color .2s;
+}
+.nav-links a:hover{color:var(--white)}
+.nav-cta{
+  background:var(--orange);color:#fff;
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;
+  padding:10px 22px;
+  clip-path:polygon(0 0,calc(100% - 8px) 0,100% 8px,100% 100%,8px 100%,0 calc(100% - 8px));
+  transition:background .2s;
+}
+.nav-cta:hover{background:var(--orange2)}
+.hamburger{
+  display:none;flex-direction:column;gap:5px;padding:6px;
+  width:36px;height:36px;justify-content:center;align-items:center;
+}
+.hamburger span{
+  display:block;width:22px;height:2px;background:var(--white);
+  transition:all .3s;
+}
+.nav-mobile{
+  display:none;position:fixed;top:var(--nav-h);left:0;right:0;bottom:0;
+  background:rgba(8,8,8,0.98);backdrop-filter:blur(20px);
+  flex-direction:column;align-items:center;justify-content:center;gap:8px;
+  z-index:199;
+}
+.nav-mobile.open{display:flex}
+.nav-mobile a{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:36px;letter-spacing:4px;color:var(--white);
+  padding:10px 20px;transition:color .2s;
+}
+.nav-mobile a:hover{color:var(--orange)}
+.nav-mobile .btn{margin-top:16px}
 
-  .hero-stats {
-    position: absolute; bottom: 48px; left: 48px; z-index: 2;
-    display: flex; gap: 48px;
-  }
-  .stat-num {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 42px; color: var(--orange); line-height: 1;
-  }
-  .stat-label {
-    font-family: 'Barlow Condensed', sans-serif;
-    font-size: 12px; letter-spacing: 2px; text-transform: uppercase;
-    color: var(--gray);
-  }
+/* ═══════════════════════════════════════
+   HERO
+═══════════════════════════════════════ */
+.hero{
+  min-height:100vh;
+  display:flex;align-items:center;
+  position:relative;overflow:hidden;
+  padding:var(--nav-h) 0 0;
+}
+.hero-bg{
+  position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse 900px 700px at 75% 45%,rgba(232,67,10,0.1) 0%,transparent 65%),
+    radial-gradient(ellipse 400px 400px at 10% 80%,rgba(232,67,10,0.05) 0%,transparent 70%),
+    var(--black);
+}
+.hero-grid-lines{
+  position:absolute;inset:0;
+  background-image:
+    repeating-linear-gradient(90deg,rgba(255,255,255,0.025) 0,rgba(255,255,255,0.025) 1px,transparent 1px,transparent 100px),
+    repeating-linear-gradient(0deg,rgba(255,255,255,0.025) 0,rgba(255,255,255,0.025) 1px,transparent 1px,transparent 100px);
+  pointer-events:none;
+}
+.hero-inner{
+  position:relative;z-index:2;
+  width:100%;max-width:1360px;margin:0 auto;padding:80px 32px 120px;
+  display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center;
+}
+.hero-eyebrow{
+  display:inline-flex;align-items:center;gap:10px;
+  background:rgba(232,67,10,0.12);
+  border:1px solid rgba(232,67,10,0.3);
+  border-radius:2px;padding:7px 16px;margin-bottom:28px;
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:11px;font-weight:700;letter-spacing:3.5px;text-transform:uppercase;
+  color:var(--orange);
+}
+.hero-dot{
+  width:7px;height:7px;border-radius:50%;background:var(--orange);
+  animation:dot-pulse 1.8s ease-in-out infinite;
+}
+@keyframes dot-pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.3;transform:scale(1.6)}}
+.hero h1{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(62px,8vw,118px);
+  line-height:.9;letter-spacing:1px;
+  margin-bottom:28px;
+}
+.hero h1 .accent{color:var(--orange)}
+.hero h1 .outline{
+  -webkit-text-stroke:1.5px rgba(242,237,228,0.35);
+  color:transparent;
+}
+.hero-sub{
+  font-size:17px;font-weight:300;line-height:1.75;
+  color:var(--muted);max-width:480px;margin-bottom:40px;
+}
+.hero-actions{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:56px}
+.hero-trust{
+  display:flex;gap:0;
+  border-top:1px solid var(--border);
+  padding-top:32px;
+}
+.trust-item{
+  flex:1;padding:0 24px;
+  border-right:1px solid var(--border);
+}
+.trust-item:first-child{padding-left:0}
+.trust-item:last-child{border-right:none}
+.trust-num{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:44px;color:var(--orange);line-height:1;
+}
+.trust-label{
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:11px;letter-spacing:2px;text-transform:uppercase;
+  color:var(--muted);margin-top:4px;
+}
+.hero-visual{
+  position:relative;display:flex;align-items:center;justify-content:center;
+}
+.hero-moto-wrap{
+  position:relative;width:100%;
+}
+.hero-moto-bg{
+  position:absolute;inset:-20%;
+  background:radial-gradient(ellipse at center,rgba(232,67,10,0.15) 0%,transparent 65%);
+  border-radius:50%;
+  animation:glow-pulse 3s ease-in-out infinite;
+}
+@keyframes glow-pulse{0%,100%{opacity:.6;transform:scale(1)}50%{opacity:1;transform:scale(1.05)}}
+.hero-moto-svg{width:100%;max-width:580px;margin:0 auto;animation:float 4s ease-in-out infinite}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+.hero-badge-float{
+  position:absolute;bottom:10%;right:5%;
+  background:var(--card2);border:1px solid var(--border2);
+  padding:14px 20px;display:flex;align-items:center;gap:12px;
+}
+.hero-badge-float .icon{font-size:28px}
+.hero-badge-float .text strong{
+  display:block;font-family:'Barlow Condensed',sans-serif;
+  font-size:15px;font-weight:700;letter-spacing:1px;
+}
+.hero-badge-float .text span{
+  font-size:12px;color:var(--muted);
+}
 
-  /* ── SECTION GENERIC ── */
-  section { padding: 100px 48px; }
-  .section-tag {
-    font-family: 'Barlow Condensed', sans-serif;
-    font-size: 12px; letter-spacing: 4px; text-transform: uppercase;
-    color: var(--orange); margin-bottom: 12px;
-  }
-  .section-title {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: clamp(42px, 5vw, 72px);
-    letter-spacing: 2px; line-height: 1;
-    margin-bottom: 48px;
-  }
-  .divider {
-    width: 48px; height: 3px;
-    background: linear-gradient(90deg, var(--orange), transparent);
-    margin-bottom: 20px;
-  }
+/* Stripe */
+.stripe-accent{
+  height:4px;
+  background:repeating-linear-gradient(90deg,var(--orange) 0,var(--orange) 28px,transparent 28px,transparent 36px);
+}
 
-  /* ── SERVIÇOS ── */
-  #servicos { background: var(--dark); }
-  .services-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    gap: 2px;
-  }
-  .service-card {
-    background: var(--card);
-    padding: 40px 32px;
-    border-top: 2px solid transparent;
-    transition: border-color .25s, transform .25s;
-    cursor: default;
-  }
-  .service-card:hover { border-color: var(--orange); transform: translateY(-4px); }
-  .service-icon {
-    width: 52px; height: 52px;
-    background: rgba(255,77,0,0.1);
-    border-radius: 4px;
-    display: flex; align-items: center; justify-content: center;
-    margin-bottom: 24px;
-    font-size: 26px;
-  }
-  .service-card h3 {
-    font-family: 'Barlow Condensed', sans-serif;
-    font-size: 20px; font-weight: 700; letter-spacing: 1px;
-    text-transform: uppercase; margin-bottom: 10px;
-  }
-  .service-card p {
-    font-size: 14px; font-weight: 300;
-    color: rgba(240,236,228,0.55); line-height: 1.7;
-  }
+/* ═══════════════════════════════════════
+   SERVICES
+═══════════════════════════════════════ */
+#servicos{padding:100px 0;background:var(--dark)}
+.services-intro{
+  max-width:1360px;margin:0 auto;padding:0 32px;
+  display:flex;justify-content:space-between;align-items:flex-end;
+  margin-bottom:56px;flex-wrap:wrap;gap:24px;
+}
+.services-intro-text{}
+.services-intro p{
+  max-width:460px;font-size:16px;font-weight:300;color:var(--muted);line-height:1.75;margin-top:12px;
+}
+.services-grid{
+  max-width:1360px;margin:0 auto;padding:0 32px;
+  display:grid;grid-template-columns:repeat(3,1fr);gap:2px;
+}
+.service-card{
+  background:var(--card);padding:44px 36px;
+  border-top:3px solid transparent;
+  transition:border-color .3s,background .3s,transform .3s;
+  position:relative;overflow:hidden;
+}
+.service-card::after{
+  content:'';position:absolute;bottom:0;left:0;right:0;height:0;
+  background:linear-gradient(0deg,rgba(232,67,10,0.06),transparent);
+  transition:height .3s;
+}
+.service-card:hover{border-color:var(--orange);background:var(--card2);transform:translateY(-5px)}
+.service-card:hover::after{height:100%}
+.service-card-icon{
+  width:56px;height:56px;border-radius:4px;
+  background:rgba(232,67,10,0.1);
+  display:flex;align-items:center;justify-content:center;
+  font-size:28px;margin-bottom:28px;
+  transition:background .3s;
+}
+.service-card:hover .service-card-icon{background:rgba(232,67,10,0.2)}
+.service-card h3{
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:20px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;
+  margin-bottom:12px;
+}
+.service-card p{font-size:14px;font-weight:300;color:var(--muted);line-height:1.75}
+.service-card-tags{
+  display:flex;flex-wrap:wrap;gap:6px;margin-top:20px;
+}
+.stag{
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;
+  color:var(--orange);background:rgba(232,67,10,0.1);
+  padding:3px 10px;border-radius:2px;
+}
+.services-cta{
+  max-width:1360px;margin:48px auto 0;padding:0 32px;
+  text-align:center;
+}
 
-  /* ── PORTFOLIO ── */
-  #portfolio { background: var(--black); }
-  .portfolio-header {
-    display: flex; justify-content: space-between; align-items: flex-end;
-    margin-bottom: 40px; flex-wrap: wrap; gap: 20px;
-  }
-  .filter-tabs { display: flex; gap: 4px; }
-  .filter-tab {
-    font-family: 'Barlow Condensed', sans-serif;
-    font-size: 12px; letter-spacing: 2px; text-transform: uppercase;
-    padding: 8px 18px;
-    background: transparent; border: 1px solid var(--border);
-    color: var(--gray); cursor: pointer; transition: all .2s;
-  }
-  .filter-tab.active, .filter-tab:hover {
-    background: var(--orange); border-color: var(--orange); color: #000;
-  }
-  .portfolio-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 3px;
-  }
-  .portfolio-item {
-    position: relative; overflow: hidden;
-    background: var(--card);
-    aspect-ratio: 4/3;
-    cursor: pointer;
-  }
-  .portfolio-item:first-child { grid-column: span 2; grid-row: span 2; aspect-ratio: auto; min-height: 360px; }
-  .portfolio-thumb {
-    width: 100%; height: 100%;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 64px;
-    transition: transform .4s;
-  }
-  .portfolio-item:hover .portfolio-thumb { transform: scale(1.05); }
-  .portfolio-overlay {
-    position: absolute; inset: 0;
-    background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, transparent 60%);
-    opacity: 0; transition: opacity .3s;
-    display: flex; align-items: flex-end; padding: 24px;
-  }
-  .portfolio-item:hover .portfolio-overlay { opacity: 1; }
-  .portfolio-info h4 {
-    font-family: 'Barlow Condensed', sans-serif;
-    font-size: 18px; font-weight: 700; letter-spacing: 1px;
-    text-transform: uppercase;
-  }
-  .portfolio-info span {
-    font-size: 12px; color: var(--orange);
-    font-family: 'Barlow Condensed', sans-serif; letter-spacing: 2px; text-transform: uppercase;
-  }
+/* ═══════════════════════════════════════
+   ABOUT
+═══════════════════════════════════════ */
+#sobre{padding:100px 0;background:var(--black)}
+.about-inner{
+  max-width:1360px;margin:0 auto;padding:0 32px;
+  display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;
+}
+.about-visual{position:relative}
+.about-visual-box{
+  background:var(--card);
+  aspect-ratio:1;max-width:520px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:100px;
+  position:relative;overflow:hidden;
+}
+.about-visual-box::before{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(232,67,10,0.1) 0%,transparent 60%);
+}
+.about-corner{
+  position:absolute;bottom:-16px;right:-16px;
+  width:55%;height:55%;
+  border:2px solid var(--orange);
+  pointer-events:none;
+}
+.about-badge{
+  position:absolute;top:-20px;left:-20px;
+  background:var(--orange);
+  padding:20px 24px;
+  font-family:'Bebas Neue',sans-serif;
+  font-size:13px;letter-spacing:3px;
+  line-height:1.3;
+}
+.about-text .section-title{margin-bottom:8px}
+.about-text p{
+  font-size:15px;font-weight:300;color:var(--muted);line-height:1.8;
+  margin-bottom:16px;
+}
+.about-differentials{
+  display:grid;grid-template-columns:1fr 1fr;gap:2px;margin-top:36px;
+}
+.diff-item{
+  background:var(--card);padding:20px 22px;
+  border-left:2px solid transparent;
+  transition:border-color .2s;
+  display:flex;align-items:flex-start;gap:12px;
+}
+.diff-item:hover{border-color:var(--orange)}
+.diff-icon{font-size:20px;flex-shrink:0;margin-top:2px}
+.diff-text strong{
+  display:block;font-family:'Barlow Condensed',sans-serif;
+  font-size:14px;font-weight:700;letter-spacing:1px;text-transform:uppercase;
+  margin-bottom:3px;
+}
+.diff-text span{font-size:13px;color:var(--muted)}
 
-  /* ── SOBRE ── */
-  #sobre {
-    background: var(--dark);
-    display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center;
-  }
-  .sobre-visual {
-    position: relative;
-    background: var(--card);
-    aspect-ratio: 1;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 120px;
-    overflow: hidden;
-  }
-  .sobre-visual::after {
-    content: '';
-    position: absolute; bottom: -20px; right: -20px;
-    width: 60%; height: 60%;
-    border: 2px solid var(--orange);
-    z-index: -1;
-  }
-  .sobre-text .section-title { margin-bottom: 20px; }
-  .sobre-text p {
-    font-size: 15px; font-weight: 300; line-height: 1.8;
-    color: rgba(240,236,228,0.6); margin-bottom: 16px;
-  }
-  .features-list { margin-top: 32px; display: flex; flex-direction: column; gap: 12px; }
-  .feature-item {
-    display: flex; align-items: center; gap: 12px;
-    font-family: 'Barlow Condensed', sans-serif;
-    font-size: 15px; letter-spacing: 1px;
-  }
-  .feature-item::before {
-    content: ''; flex-shrink: 0;
-    width: 20px; height: 2px; background: var(--orange);
-  }
+/* ═══════════════════════════════════════
+   PORTFOLIO GRID
+═══════════════════════════════════════ */
+#portfolio{padding:100px 0;background:var(--dark)}
+.portfolio-head{
+  max-width:1360px;margin:0 auto;padding:0 32px;
+  display:flex;justify-content:space-between;align-items:flex-end;
+  margin-bottom:48px;flex-wrap:wrap;gap:24px;
+}
+.portfolio-filters{display:flex;gap:4px;flex-wrap:wrap}
+.filter-btn{
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;
+  padding:9px 20px;
+  border:1px solid var(--border);color:var(--muted);
+  transition:all .2s;
+}
+.filter-btn.active,.filter-btn:hover{
+  background:var(--orange);border-color:var(--orange);color:#fff;
+}
+.portfolio-grid{
+  max-width:1360px;margin:0 auto;padding:0 32px;
+  display:grid;grid-template-columns:repeat(3,1fr);gap:3px;
+}
+.portfolio-card{
+  position:relative;overflow:hidden;
+  background:var(--card);
+  aspect-ratio:4/3;cursor:pointer;
+}
+.portfolio-card.featured{
+  grid-column:span 2;grid-row:span 2;
+  aspect-ratio:auto;min-height:420px;
+}
+.portfolio-thumb{
+  width:100%;height:100%;
+  display:flex;align-items:center;justify-content:center;
+  font-size:72px;
+  transition:transform .5s ease;
+}
+.portfolio-card.featured .portfolio-thumb{font-size:110px}
+.portfolio-card:hover .portfolio-thumb{transform:scale(1.07)}
+.portfolio-overlay{
+  position:absolute;inset:0;
+  background:linear-gradient(to top,rgba(0,0,0,.95) 0%,rgba(0,0,0,.3) 50%,transparent 80%);
+  opacity:0;transition:opacity .35s ease;
+  display:flex;flex-direction:column;justify-content:flex-end;
+  padding:28px;
+}
+.portfolio-card:hover .portfolio-overlay{opacity:1}
+.portfolio-cat{
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;
+  color:var(--orange);margin-bottom:6px;
+}
+.portfolio-overlay h3{
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:18px;font-weight:700;letter-spacing:1px;text-transform:uppercase;
+  margin-bottom:12px;
+}
+.portfolio-card.featured .portfolio-overlay h3{font-size:24px}
+.portfolio-view-btn{
+  display:inline-flex;align-items:center;gap:8px;
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;
+  color:var(--orange);
+  transition:gap .2s;
+}
+.portfolio-view-btn:hover{gap:12px}
+.portfolio-view-btn svg{width:14px;height:14px}
 
-  /* ── CONTATO ── */
-  #contato {
-    background: var(--black);
-    text-align: center;
-  }
-  #contato .section-title { margin-bottom: 16px; }
-  #contato > p {
-    font-size: 16px; font-weight: 300; color: rgba(240,236,228,0.5);
-    max-width: 480px; margin: 0 auto 48px;
-  }
-  .contact-grid {
-    display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 2px; max-width: 900px; margin: 0 auto 48px;
-  }
-  .contact-card {
-    background: var(--card); padding: 36px 24px;
-    display: flex; flex-direction: column; align-items: center; gap: 12px;
-    border-bottom: 2px solid transparent;
-    transition: border-color .2s;
-  }
-  .contact-card:hover { border-color: var(--orange); }
-  .contact-card .icon { font-size: 32px; }
-  .contact-card h4 {
-    font-family: 'Barlow Condensed', sans-serif;
-    font-size: 12px; letter-spacing: 3px; text-transform: uppercase; color: var(--gray);
-  }
-  .contact-card p { font-size: 15px; font-weight: 500; }
+/* ═══════════════════════════════════════
+   WHY CHOOSE US
+═══════════════════════════════════════ */
+.why-section{padding:100px 0;background:var(--black)}
+.why-inner{max-width:1360px;margin:0 auto;padding:0 32px}
+.why-grid{
+  display:grid;grid-template-columns:1fr 2fr;gap:60px;align-items:start;
+  margin-top:56px;
+}
+.why-left h3{
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:18px;font-weight:700;letter-spacing:1px;text-transform:uppercase;
+  color:var(--muted);margin-bottom:12px;
+}
+.why-left p{font-size:15px;font-weight:300;color:var(--muted);line-height:1.8;margin-bottom:28px}
+.why-items{display:flex;flex-direction:column;gap:2px}
+.why-item{
+  display:flex;gap:20px;align-items:flex-start;
+  background:var(--card);padding:28px 32px;
+  border-left:3px solid transparent;
+  transition:border-color .25s,background .25s;
+}
+.why-item:hover{border-color:var(--orange);background:var(--card2)}
+.why-num{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:36px;color:rgba(232,67,10,0.25);
+  line-height:1;flex-shrink:0;min-width:36px;
+  transition:color .25s;
+}
+.why-item:hover .why-num{color:var(--orange)}
+.why-item-text h4{
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:17px;font-weight:700;letter-spacing:1px;text-transform:uppercase;
+  margin-bottom:6px;
+}
+.why-item-text p{font-size:14px;font-weight:300;color:var(--muted);line-height:1.7}
 
-  /* ── FOOTER ── */
-  footer {
-    background: var(--dark);
-    border-top: 1px solid var(--border);
-    padding: 28px 48px;
-    display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;
-  }
-  footer .logo { font-size: 22px; }
-  footer p {
-    font-family: 'Barlow Condensed', sans-serif;
-    font-size: 12px; letter-spacing: 1px; color: var(--gray);
-  }
-  .footer-links { display: flex; gap: 24px; }
-  .footer-links a {
-    font-family: 'Barlow Condensed', sans-serif;
-    font-size: 12px; letter-spacing: 2px; text-transform: uppercase;
-    color: var(--gray); text-decoration: none; transition: color .2s;
-  }
-  .footer-links a:hover { color: var(--orange); }
+/* ═══════════════════════════════════════
+   CONTACT
+═══════════════════════════════════════ */
+#contato{padding:100px 0;background:var(--dark)}
+.contact-inner{max-width:1360px;margin:0 auto;padding:0 32px}
+.contact-layout{
+  display:grid;grid-template-columns:1fr 1fr;gap:60px;
+  margin-top:56px;align-items:start;
+}
+.contact-info{}
+.contact-info p{font-size:15px;font-weight:300;color:var(--muted);line-height:1.8;margin-bottom:40px}
+.contact-cards{display:flex;flex-direction:column;gap:2px}
+.contact-card{
+  display:flex;align-items:center;gap:20px;
+  background:var(--card);padding:22px 28px;
+  border-left:3px solid transparent;
+  transition:border-color .2s;
+}
+.contact-card:hover{border-color:var(--orange)}
+.contact-icon{
+  width:44px;height:44px;border-radius:4px;
+  background:rgba(232,67,10,0.1);
+  display:flex;align-items:center;justify-content:center;
+  font-size:20px;flex-shrink:0;
+}
+.contact-card-text strong{
+  display:block;font-family:'Barlow Condensed',sans-serif;
+  font-size:11px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;
+  color:var(--muted);margin-bottom:3px;
+}
+.contact-card-text span{font-size:15px;font-weight:500;color:var(--white)}
+.contact-cta-box{
+  background:var(--card2);
+  border:1px solid var(--border2);
+  padding:52px 44px;
+  display:flex;flex-direction:column;justify-content:center;
+}
+.contact-cta-box h3{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(36px,4vw,54px);
+  line-height:.95;color:var(--white);
+  margin-bottom:16px;
+}
+.contact-cta-box h3 span{color:var(--orange)}
+.contact-cta-box p{
+  font-size:15px;font-weight:300;color:var(--muted);
+  margin-bottom:36px;line-height:1.7;
+}
+.contact-cta-box .btn{width:100%;margin-bottom:12px}
 
-  /* ── SCROLL ANIMATIONS ── */
-  .reveal {
-    opacity: 0; transform: translateY(30px);
-    transition: opacity .6s ease, transform .6s ease;
-  }
-  .reveal.visible { opacity: 1; transform: translateY(0); }
+/* ═══════════════════════════════════════
+   FOOTER
+═══════════════════════════════════════ */
+footer{
+  background:var(--black);
+  border-top:1px solid var(--border);
+  padding:40px 0;
+}
+.footer-inner{
+  max-width:1360px;margin:0 auto;padding:0 32px;
+  display:flex;justify-content:space-between;align-items:center;
+  flex-wrap:wrap;gap:20px;
+}
+.footer-logo{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:24px;letter-spacing:5px;
+  display:flex;align-items:center;gap:10px;
+  cursor:pointer;
+}
+.footer-logo span{color:var(--orange)}
+.footer-links{display:flex;gap:28px;flex-wrap:wrap}
+.footer-links a{
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;
+  color:var(--muted);transition:color .2s;
+}
+.footer-links a:hover{color:var(--orange)}
+.footer-copy{
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:11px;letter-spacing:1px;color:rgba(255,255,255,0.2);
+}
 
-  /* ── STRIPE ACCENT ── */
-  .stripe {
-    height: 4px;
-    background: repeating-linear-gradient(
-      90deg,
-      var(--orange) 0, var(--orange) 24px,
-      transparent 24px, transparent 32px
-    );
-  }
+/* ═══════════════════════════════════════
+   PORTFOLIO DETAIL PAGE
+═══════════════════════════════════════ */
+#page-portfolio-detail{background:var(--black);min-height:100vh;padding-top:var(--nav-h)}
+.detail-hero{
+  background:var(--dark);
+  padding:70px 0 60px;
+  border-bottom:1px solid var(--border);
+}
+.detail-hero-inner{max-width:1200px;margin:0 auto;padding:0 32px}
+.detail-back{
+  display:inline-flex;align-items:center;gap:8px;
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;
+  color:var(--muted);margin-bottom:32px;cursor:pointer;
+  transition:color .2s;
+}
+.detail-back:hover{color:var(--orange)}
+.detail-back svg{width:14px;height:14px;transition:transform .2s}
+.detail-back:hover svg{transform:translateX(-4px)}
+.detail-hero-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+.detail-cat{
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:11px;font-weight:700;letter-spacing:3.5px;text-transform:uppercase;
+  color:var(--orange);margin-bottom:14px;display:flex;align-items:center;gap:8px;
+}
+.detail-cat::before{content:'';width:18px;height:2px;background:var(--orange)}
+.detail-hero h1{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(42px,6vw,80px);
+  line-height:.95;letter-spacing:1px;margin-bottom:20px;
+}
+.detail-desc{
+  font-size:16px;font-weight:300;color:var(--muted);
+  line-height:1.8;margin-bottom:32px;
+}
+.detail-specs{display:grid;grid-template-columns:1fr 1fr;gap:2px;margin-bottom:36px}
+.spec-item{background:var(--card);padding:16px 20px}
+.spec-item strong{
+  display:block;font-family:'Barlow Condensed',sans-serif;
+  font-size:10px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;
+  color:var(--muted);margin-bottom:4px;
+}
+.spec-item span{font-size:15px;font-weight:500}
+.detail-visual{
+  aspect-ratio:1;background:var(--card);
+  display:flex;align-items:center;justify-content:center;
+  font-size:100px;position:relative;overflow:hidden;
+}
+.detail-visual::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse at center,rgba(232,67,10,0.15),transparent 65%);
+}
+.detail-body{max-width:1200px;margin:0 auto;padding:60px 32px}
+.detail-body-grid{display:grid;grid-template-columns:2fr 1fr;gap:48px}
+.detail-section{margin-bottom:48px}
+.detail-section h2{
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:22px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;
+  margin-bottom:16px;padding-bottom:12px;
+  border-bottom:1px solid var(--border);
+}
+.detail-section p{font-size:15px;font-weight:300;color:var(--muted);line-height:1.8;margin-bottom:12px}
+.detail-section ul{display:flex;flex-direction:column;gap:8px}
+.detail-section ul li{
+  display:flex;align-items:flex-start;gap:10px;
+  font-size:14px;color:var(--muted);
+}
+.detail-section ul li::before{
+  content:'';flex-shrink:0;width:18px;height:2px;
+  background:var(--orange);margin-top:10px;
+}
+.detail-result-box{
+  background:var(--card2);border:1px solid var(--border2);
+  padding:32px;
+}
+.detail-result-box h3{
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:16px;font-weight:700;letter-spacing:2px;text-transform:uppercase;
+  color:var(--orange);margin-bottom:16px;
+}
+.detail-result-num{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:56px;color:var(--white);line-height:1;
+}
+.detail-result-label{font-size:13px;color:var(--muted);margin-bottom:20px}
+.detail-sidebar{}
+.sidebar-card{
+  background:var(--card);padding:28px;
+  margin-bottom:3px;
+}
+.sidebar-card h4{
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:14px;font-weight:700;letter-spacing:2px;text-transform:uppercase;
+  margin-bottom:16px;color:var(--white);
+}
+.sidebar-card p{font-size:13px;color:var(--muted);line-height:1.7;margin-bottom:16px}
+.sidebar-card .btn{width:100%}
+.related-works{max-width:1200px;margin:0 auto;padding:0 32px 80px}
+.related-works h2{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:36px;margin-bottom:24px;
+}
+.related-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:3px}
+.related-card{
+  background:var(--card);
+  aspect-ratio:4/3;
+  display:flex;align-items:center;justify-content:center;
+  font-size:48px;
+  position:relative;overflow:hidden;cursor:pointer;
+}
+.related-card .overlay{
+  position:absolute;inset:0;
+  background:rgba(0,0,0,.7);
+  display:flex;flex-direction:column;justify-content:flex-end;
+  padding:20px;opacity:0;transition:opacity .3s;
+}
+.related-card:hover .overlay{opacity:1}
+.related-card .overlay h4{
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:15px;font-weight:700;letter-spacing:1px;text-transform:uppercase;
+}
+.related-card .overlay span{font-size:12px;color:var(--orange)}
 
-  /* ── MOBILE ── */
-  @media (max-width: 768px) {
-    nav { padding: 16px 24px; }
-    .nav-links { gap: 20px; }
-    .nav-links a { font-size: 12px; }
-    section { padding: 70px 24px; }
-    .hero { padding: 0 24px; }
-    .hero-moto { display: none; }
-    .hero-stats { left: 24px; gap: 24px; bottom: 32px; }
-    #sobre { grid-template-columns: 1fr; gap: 40px; }
-    .sobre-visual { max-height: 260px; }
-    .portfolio-grid { grid-template-columns: 1fr 1fr; }
-    .portfolio-item:first-child { grid-column: span 2; }
-    footer { padding: 24px; flex-direction: column; text-align: center; }
-  }
+/* ═══════════════════════════════════════
+   FLOATING WPP
+═══════════════════════════════════════ */
+.wpp-float{
+  position:fixed;bottom:28px;right:28px;z-index:300;
+  width:56px;height:56px;border-radius:50%;
+  background:#25D366;
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 4px 20px rgba(37,211,102,.4);
+  transition:transform .25s,box-shadow .25s;
+  animation:wpp-in .5s ease .8s both;
+}
+@keyframes wpp-in{from{opacity:0;transform:scale(.5)}to{opacity:1;transform:scale(1)}}
+.wpp-float:hover{transform:scale(1.1);box-shadow:0 6px 28px rgba(37,211,102,.6)}
+.wpp-float svg{width:28px;height:28px}
+
+/* ═══════════════════════════════════════
+   RESPONSIVE
+═══════════════════════════════════════ */
+@media(max-width:1024px){
+  .hero-inner{grid-template-columns:1fr;text-align:center}
+  .hero-sub{margin:0 auto 40px}
+  .hero-actions{justify-content:center}
+  .hero-trust{flex-wrap:wrap}
+  .trust-item{min-width:120px;border-right:none;border-bottom:1px solid var(--border);padding:16px}
+  .trust-item:last-child{border-bottom:none}
+  .hero-visual{display:none}
+  .about-inner{grid-template-columns:1fr;gap:40px}
+  .about-visual{display:none}
+  .contact-layout{grid-template-columns:1fr}
+  .why-grid{grid-template-columns:1fr}
+  .detail-hero-grid{grid-template-columns:1fr}
+  .detail-visual{display:none}
+  .detail-body-grid{grid-template-columns:1fr}
+  .detail-sidebar{display:grid;grid-template-columns:1fr 1fr;gap:3px}
+  .related-grid{grid-template-columns:1fr 1fr}
+}
+@media(max-width:768px){
+  :root{--nav-h:64px}
+  .nav-links,.nav-cta{display:none}
+  .hamburger{display:flex}
+  .services-grid{grid-template-columns:1fr}
+  .portfolio-grid{grid-template-columns:1fr 1fr}
+  .portfolio-card.featured{grid-column:span 2;min-height:240px}
+  .about-differentials{grid-template-columns:1fr}
+  section{padding:70px 0}
+  .services-intro,.portfolio-head,.contact-inner,.why-inner{padding:0 20px}
+  .services-grid,.portfolio-grid,.contact-layout,.why-items,.footer-inner{padding:0 20px}
+  .hero-inner{padding:60px 20px 80px}
+  .hero-trust{display:grid;grid-template-columns:1fr 1fr}
+  .trust-item{border-right:1px solid var(--border);border-bottom:none}
+  .trust-item:nth-child(2n){border-right:none}
+  .footer-inner{padding:0 20px;flex-direction:column;text-align:center}
+  .footer-links{justify-content:center}
+  .detail-hero-inner,.detail-body,.related-works{padding:0 20px;padding-top:0}
+  .detail-body{padding-top:40px}
+  .related-works{padding-bottom:60px}
+  .detail-specs{grid-template-columns:1fr}
+  .detail-sidebar{grid-template-columns:1fr}
+  .related-grid{grid-template-columns:1fr}
+}
+@media(max-width:480px){
+  .portfolio-grid{grid-template-columns:1fr}
+  .portfolio-card.featured{grid-column:span 1}
+  .hero-actions{flex-direction:column;align-items:center}
+  .btn{width:100%;justify-content:center}
+  .hero-trust{grid-template-columns:1fr 1fr}
+}
 </style>
 </head>
 <body>
 
-<!-- NAV -->
-<nav>
-  <div class="logo">
-    <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
-      <ellipse cx="8" cy="24" rx="6" ry="6" fill="none" stroke="#FF4D00" stroke-width="2.5"/>
-      <ellipse cx="24" cy="24" rx="6" ry="6" fill="none" stroke="#FF4D00" stroke-width="2.5"/>
-      <path d="M14 24 L11 14 L16 10 L22 14 L26 18 L24 18" stroke="#FF4D00" stroke-width="2.5" fill="none" stroke-linejoin="round"/>
-      <path d="M11 14 L20 14" stroke="#FF4D00" stroke-width="2" fill="none"/>
-    </svg>
-    GRAU <span>MOTOS</span>
-  </div>
-  <div class="nav-links">
-    <a href="#servicos">Serviços</a>
-    <a href="#portfolio">Portfólio</a>
-    <a href="#sobre">Sobre</a>
-    <a href="#contato">Contato</a>
+<!-- ═══ NAV ═══ -->
+<nav class="nav" role="navigation" aria-label="Navegação principal">
+  <div class="nav-inner">
+    <div class="nav-logo" onclick="goHome()" aria-label="Grau Motos - página inicial">
+      <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <circle cx="8" cy="24" r="6" stroke="#E8430A" stroke-width="2.5"/>
+        <circle cx="24" cy="24" r="6" stroke="#E8430A" stroke-width="2.5"/>
+        <path d="M14 24L11 13L17 8L23 13L27 18" stroke="#E8430A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M11 13L21 13" stroke="#E8430A" stroke-width="2"/>
+      </svg>
+      GRAU <span>MOTOS</span>
+    </div>
+    <div class="nav-links" aria-label="Links de navegação">
+      <a href="#servicos" onclick="goHome()">Serviços</a>
+      <a href="#portfolio" onclick="goHome()">Portfólio</a>
+      <a href="#sobre" onclick="goHome()">Sobre</a>
+      <a href="#contato" onclick="goHome()">Contato</a>
+    </div>
+    <a href="https://wa.me/5511937429580" target="_blank" rel="noopener" class="nav-cta btn" aria-label="Agendar serviço via WhatsApp">Agendar Serviço</a>
+    <button class="hamburger" onclick="toggleMenu()" aria-label="Abrir menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
   </div>
 </nav>
+<nav class="nav-mobile" id="navMobile" aria-label="Menu mobile">
+  <a href="#servicos" onclick="goHome();toggleMenu()">Serviços</a>
+  <a href="#portfolio" onclick="goHome();toggleMenu()">Portfólio</a>
+  <a href="#sobre" onclick="goHome();toggleMenu()">Sobre</a>
+  <a href="#contato" onclick="goHome();toggleMenu()">Contato</a>
+  <a href="https://wa.me/5511937429580" target="_blank" class="btn btn-wpp">📲 Agendar pelo WhatsApp</a>
+</nav>
 
-<!-- HERO -->
-<section class="hero" id="inicio">
-  <div class="hero-bg"></div>
-  <div class="hero-content">
-    <div class="hero-badge">Oficina Especializada em Motos</div>
-    <h1>PEÇAS.<br><em>POTÊNCIA.</em><br>PERFORMANCE.</h1>
-    <p>Especialistas em revisão, customização e mecânica de alta performance. Sua moto nas mãos de quem entende do negócio.</p>
-    <div class="hero-cta">
-      <a href="#portfolio" class="btn-primary">Ver Portfólio →</a>
-      <a href="#contato" class="btn-outline">Fale Conosco</a>
-    </div>
-  </div>
+<!-- ═══════════════════════════════════════
+     PAGE: HOME
+═══════════════════════════════════════ -->
+<main id="page-home" class="page active">
 
-  <div class="hero-moto">
-    <svg viewBox="0 0 600 340" fill="none" xmlns="http://www.w3.org/2000/svg" opacity="0.35">
-      <circle cx="140" cy="240" r="90" stroke="#FF4D00" stroke-width="3"/>
-      <circle cx="140" cy="240" r="60" stroke="#555" stroke-width="1.5"/>
-      <circle cx="140" cy="240" r="16" fill="#FF4D00" opacity=".6"/>
-      <circle cx="460" cy="240" r="90" stroke="#FF4D00" stroke-width="3"/>
-      <circle cx="460" cy="240" r="60" stroke="#555" stroke-width="1.5"/>
-      <circle cx="460" cy="240" r="16" fill="#FF4D00" opacity=".6"/>
-      <path d="M200 240 L240 130 L320 110 L380 130 L460 180" stroke="#FF6622" stroke-width="4" stroke-linecap="round"/>
-      <path d="M240 130 L200 240" stroke="#888" stroke-width="3"/>
-      <path d="M320 110 L300 240" stroke="#888" stroke-width="3"/>
-      <rect x="260" y="175" width="100" height="65" rx="8" fill="#222" stroke="#FF4D00" stroke-width="2"/>
-      <rect x="275" y="188" width="28" height="38" rx="4" fill="#333"/>
-      <rect x="315" y="188" width="28" height="38" rx="4" fill="#333"/>
-      <path d="M260 130 Q300 100 340 115 L360 155 L250 155 Z" fill="#1a1a1a" stroke="#FF4D00" stroke-width="2"/>
-      <line x1="420" y1="130" x2="500" y2="110" stroke="#FF4D00" stroke-width="4" stroke-linecap="round"/>
-      <line x1="420" y1="130" x2="415" y2="180" stroke="#888" stroke-width="3"/>
-      <path d="M200 240 Q165 265 100 260" stroke="#FF4D00" stroke-width="4" stroke-linecap="round"/>
-      <path d="M260 128 Q300 115 360 128 Q355 140 260 140 Z" fill="#333" stroke="#555" stroke-width="1"/>
-      <line x1="140" y1="150" x2="140" y2="240" stroke="#444" stroke-width="1"/>
-      <line x1="140" y1="240" x2="220" y2="280" stroke="#444" stroke-width="1"/>
-      <line x1="140" y1="240" x2="60" y2="280" stroke="#444" stroke-width="1"/>
-      <line x1="140" y1="240" x2="60" y2="200" stroke="#444" stroke-width="1"/>
-      <line x1="140" y1="240" x2="220" y2="200" stroke="#444" stroke-width="1"/>
-      <line x1="460" y1="150" x2="460" y2="240" stroke="#444" stroke-width="1"/>
-      <line x1="460" y1="240" x2="540" y2="280" stroke="#444" stroke-width="1"/>
-      <line x1="460" y1="240" x2="380" y2="280" stroke="#444" stroke-width="1"/>
-      <line x1="460" y1="240" x2="380" y2="200" stroke="#444" stroke-width="1"/>
-      <line x1="460" y1="240" x2="540" y2="200" stroke="#444" stroke-width="1"/>
-      <ellipse cx="478" cy="138" rx="18" ry="14" fill="#111" stroke="#FF4D00" stroke-width="2"/>
-      <ellipse cx="478" cy="138" rx="8" ry="7" fill="#FF4D00" opacity=".8"/>
-    </svg>
-  </div>
-
-  <div class="hero-stats">
-    <div class="stat">
-      <div class="stat-num">+800</div>
-      <div class="stat-label">Motos Atendidas</div>
-    </div>
-    <div class="stat">
-      <div class="stat-num">12</div>
-      <div class="stat-label">Anos de Experiência</div>
-    </div>
-    <div class="stat">
-      <div class="stat-num">98%</div>
-      <div class="stat-label">Satisfação</div>
-    </div>
-  </div>
-</section>
-
-<div class="stripe"></div>
-
-<!-- SERVIÇOS -->
-<section id="servicos">
-  <div class="section-tag reveal">O que fazemos</div>
-  <h2 class="section-title reveal">NOSSOS<br>SERVIÇOS</h2>
-  <div class="services-grid">
-    <div class="service-card reveal">
-      <div class="service-icon">🔧</div>
-      <h3>Revisão Completa</h3>
-      <p>Revisão geral com checklist técnico completo: motor, freios, suspensão, elétrica e mais.</p>
-    </div>
-    <div class="service-card reveal">
-      <div class="service-icon">⚡</div>
-      <h3>Elétrica</h3>
-      <p>Diagnóstico e reparo do sistema elétrico, injeção eletrônica, sensores e fiação.</p>
-    </div>
-    <div class="service-card reveal">
-      <div class="service-icon">🏎️</div>
-      <h3>Performance</h3>
-      <p>Preparação de motor, mapeamento, escape, suspensão ajustável e tunning esportivo.</p>
-    </div>
-    <div class="service-card reveal">
-      <div class="service-icon">🎨</div>
-      <h3>Customização</h3>
-      <p>Personalização estética e mecânica: faróis, escapamento, freios, para-lamas e acessórios.</p>
-    </div>
-    <div class="service-card reveal">
-      <div class="service-icon">🛞</div>
-      <h3>Pneus & Freios</h3>
-      <p>Troca e balanceamento de pneus, revisão e upgrade do sistema de freios ABS e convencional.</p>
-    </div>
-    <div class="service-card reveal">
-      <div class="service-icon">🔩</div>
-      <h3>Suspensão</h3>
-      <p>Regulagem, reparo e upgrade da suspensão dianteira e traseira para o seu perfil de pilotagem.</p>
-    </div>
-  </div>
-</section>
-
-<!-- PORTFOLIO -->
-<section id="portfolio">
-  <div class="portfolio-header">
-    <div>
-      <div class="section-tag reveal">Trabalhos realizados</div>
-      <h2 class="section-title reveal" style="margin-bottom:0">PORTFÓLIO</h2>
-    </div>
-    <div class="filter-tabs reveal">
-      <button class="filter-tab active">Todos</button>
-      <button class="filter-tab">Performance</button>
-      <button class="filter-tab">Custom</button>
-      <button class="filter-tab">Revisão</button>
-    </div>
-  </div>
-
-  <div class="portfolio-grid">
-    <div class="portfolio-item reveal">
-      <div class="portfolio-thumb" style="background: linear-gradient(135deg, #1a1a1a 0%, #2a1a0a 100%);">🏍️</div>
-      <div class="portfolio-overlay">
-        <div class="portfolio-info">
-          <h4>Honda CB 650R — Preparação Sport</h4>
-          <span>Performance · 2024</span>
+  <!-- HERO -->
+  <section class="hero" aria-label="Apresentação da Grau Motos">
+    <div class="hero-bg" aria-hidden="true"></div>
+    <div class="hero-grid-lines" aria-hidden="true"></div>
+    <div class="hero-inner">
+      <div class="hero-content">
+        <div class="hero-eyebrow">
+          <div class="hero-dot" aria-hidden="true"></div>
+          Oficina Especializada em Motos — São Paulo
+        </div>
+        <h1>
+          MECÂNICA<br>
+          <span class="accent">DE ALTO</span><br>
+          <span class="outline">NÍVEL.</span>
+        </h1>
+        <p class="hero-sub">
+          Revisão, manutenção, elétrica, customização e preparação de motos. Atendimento profissional, diagnóstico preciso e resultado garantido em São Paulo.
+        </p>
+        <div class="hero-actions">
+          <a href="https://wa.me/5511937429580" target="_blank" rel="noopener" class="btn btn-primary" aria-label="Solicitar orçamento pelo WhatsApp">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.168.579 4.199 1.592 5.95L.057 23.98l6.204-1.627A11.934 11.934 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.877 0-3.645-.5-5.175-1.376l-.371-.22-3.684.967.982-3.594-.24-.382A9.945 9.945 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+            Solicitar Orçamento
+          </a>
+          <a href="#servicos" class="btn btn-outline">Ver Serviços</a>
+        </div>
+        <div class="hero-trust" role="list" aria-label="Indicadores de confiança">
+          <div class="trust-item" role="listitem">
+            <div class="trust-num">+800</div>
+            <div class="trust-label">Motos Atendidas</div>
+          </div>
+          <div class="trust-item" role="listitem">
+            <div class="trust-num">12</div>
+            <div class="trust-label">Anos de Experiência</div>
+          </div>
+          <div class="trust-item" role="listitem">
+            <div class="trust-num">98%</div>
+            <div class="trust-label">Clientes Satisfeitos</div>
+          </div>
+          <div class="trust-item" role="listitem">
+            <div class="trust-num">6</div>
+            <div class="trust-label">Especialidades</div>
+          </div>
+        </div>
+      </div>
+      <div class="hero-visual" aria-hidden="true">
+        <div class="hero-moto-wrap">
+          <div class="hero-moto-bg"></div>
+          <svg class="hero-moto-svg" viewBox="0 0 580 380" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <!-- Roda Traseira -->
+            <circle cx="130" cy="265" r="95" stroke="#E8430A" stroke-width="3.5"/>
+            <circle cx="130" cy="265" r="65" stroke="rgba(255,255,255,0.1)" stroke-width="1.5" stroke-dasharray="8 8"/>
+            <circle cx="130" cy="265" r="18" fill="#E8430A" opacity=".8"/>
+            <circle cx="130" cy="265" r="10" fill="#161616"/>
+            <!-- Raios traseiros -->
+            <line x1="130" y1="170" x2="130" y2="265" stroke="rgba(255,255,255,0.15)" stroke-width="1.5"/>
+            <line x1="130" y1="265" x2="215" y2="315" stroke="rgba(255,255,255,0.15)" stroke-width="1.5"/>
+            <line x1="130" y1="265" x2="45" y2="315" stroke="rgba(255,255,255,0.15)" stroke-width="1.5"/>
+            <line x1="130" y1="265" x2="45" y2="210" stroke="rgba(255,255,255,0.15)" stroke-width="1.5"/>
+            <line x1="130" y1="265" x2="215" y2="210" stroke="rgba(255,255,255,0.15)" stroke-width="1.5"/>
+            <line x1="57" y1="186" x2="200" y2="343" stroke="rgba(255,255,255,0.1)" stroke-width="1.5"/>
+            <line x1="57" y1="343" x2="200" y2="186" stroke="rgba(255,255,255,0.1)" stroke-width="1.5"/>
+            <!-- Roda Dianteira -->
+            <circle cx="450" cy="265" r="95" stroke="#E8430A" stroke-width="3.5"/>
+            <circle cx="450" cy="265" r="65" stroke="rgba(255,255,255,0.1)" stroke-width="1.5" stroke-dasharray="8 8"/>
+            <circle cx="450" cy="265" r="18" fill="#E8430A" opacity=".8"/>
+            <circle cx="450" cy="265" r="10" fill="#161616"/>
+            <!-- Raios dianteiros -->
+            <line x1="450" y1="170" x2="450" y2="265" stroke="rgba(255,255,255,0.15)" stroke-width="1.5"/>
+            <line x1="450" y1="265" x2="535" y2="315" stroke="rgba(255,255,255,0.15)" stroke-width="1.5"/>
+            <line x1="450" y1="265" x2="365" y2="315" stroke="rgba(255,255,255,0.15)" stroke-width="1.5"/>
+            <line x1="450" y1="265" x2="365" y2="210" stroke="rgba(255,255,255,0.15)" stroke-width="1.5"/>
+            <line x1="450" y1="265" x2="535" y2="210" stroke="rgba(255,255,255,0.15)" stroke-width="1.5"/>
+            <line x1="377" y1="186" x2="520" y2="343" stroke="rgba(255,255,255,0.1)" stroke-width="1.5"/>
+            <line x1="377" y1="343" x2="520" y2="186" stroke="rgba(255,255,255,0.1)" stroke-width="1.5"/>
+            <!-- Chassi principal -->
+            <path d="M190 265 L235 140 L295 115 L370 135 L420 170 L450 200" stroke="#E8430A" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+            <!-- Garfo -->
+            <line x1="420" y1="170" x2="415" y2="200" stroke="#888" stroke-width="4" stroke-linecap="round"/>
+            <line x1="420" y1="170" x2="450" y2="200" stroke="#888" stroke-width="4" stroke-linecap="round"/>
+            <!-- Suporte traseiro -->
+            <path d="M190 265 L230 200 L235 140" stroke="#666" stroke-width="3" stroke-linecap="round"/>
+            <!-- Motor -->
+            <rect x="250" y="188" width="110" height="78" rx="8" fill="#1a1a1a" stroke="#E8430A" stroke-width="2"/>
+            <rect x="264" y="200" width="32" height="48" rx="4" fill="#262626"/>
+            <rect x="308" y="200" width="32" height="48" rx="4" fill="#262626"/>
+            <circle cx="280" cy="224" r="8" fill="#E8430A" opacity=".5"/>
+            <circle cx="324" cy="224" r="8" fill="#E8430A" opacity=".5"/>
+            <!-- Tanque -->
+            <path d="M248 138 Q292 105 338 120 L360 160 L235 160 Z" fill="#1c1c1c" stroke="#E8430A" stroke-width="2"/>
+            <path d="M265 140 Q290 122 315 130" stroke="rgba(232,67,10,0.3)" stroke-width="1.5" fill="none"/>
+            <!-- Guidão -->
+            <line x1="405" y1="145" x2="485" y2="122" stroke="#E8430A" stroke-width="4.5" stroke-linecap="round"/>
+            <circle cx="485" cy="122" r="6" fill="#E8430A"/>
+            <circle cx="405" cy="145" r="5" fill="#888"/>
+            <!-- Assento -->
+            <path d="M248 133 Q293 118 362 133 Q358 148 248 148 Z" fill="#2a2a2a" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
+            <!-- Faróis -->
+            <ellipse cx="468" cy="158" rx="20" ry="16" fill="#111" stroke="#E8430A" stroke-width="2"/>
+            <ellipse cx="468" cy="158" rx="9" ry="8" fill="#E8430A" opacity=".9"/>
+            <!-- Escapamento -->
+            <path d="M190 265 Q160 290 95 285 Q80 284 70 280" stroke="#E8430A" stroke-width="4.5" stroke-linecap="round" fill="none"/>
+            <!-- Brilho escapamento -->
+            <path d="M68 278 Q62 276 58 274" stroke="#FF6B2B" stroke-width="6" stroke-linecap="round" opacity=".7"/>
+          </svg>
+          <div class="hero-badge-float">
+            <div class="icon">🏆</div>
+            <div class="text">
+              <strong>Mecânica Certificada</strong>
+              <span>Qualidade comprovada</span>
+            </div>
+          </div>
         </div>
       </div>
     </div>
-    <div class="portfolio-item reveal">
-      <div class="portfolio-thumb" style="background: linear-gradient(135deg, #0a1520 0%, #1a2a3a 100%);">🔧</div>
-      <div class="portfolio-overlay">
-        <div class="portfolio-info">
-          <h4>Kawasaki Z400 — Revisão Completa</h4>
-          <span>Revisão · 2024</span>
-        </div>
-      </div>
-    </div>
-    <div class="portfolio-item reveal">
-      <div class="portfolio-thumb" style="background: linear-gradient(135deg, #1a0a0a 0%, #2a1515 100%);">🎨</div>
-      <div class="portfolio-overlay">
-        <div class="portfolio-info">
-          <h4>Harley XL 883 — Custom Café Racer</h4>
-          <span>Customização · 2024</span>
-        </div>
-      </div>
-    </div>
-    <div class="portfolio-item reveal">
-      <div class="portfolio-thumb" style="background: linear-gradient(135deg, #0a1a0a 0%, #152510 100%);">⚡</div>
-      <div class="portfolio-overlay">
-        <div class="portfolio-info">
-          <h4>Yamaha MT-07 — Sistema Elétrico</h4>
-          <span>Elétrica · 2023</span>
-        </div>
-      </div>
-    </div>
-    <div class="portfolio-item reveal">
-      <div class="portfolio-thumb" style="background: linear-gradient(135deg, #150a20 0%, #251535 100%);">🏆</div>
-      <div class="portfolio-overlay">
-        <div class="portfolio-info">
-          <h4>Ducati Monster — Tuning Motor</h4>
-          <span>Performance · 2023</span>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
+  </section>
 
-<!-- SOBRE -->
-<section id="sobre">
-  <div class="sobre-visual reveal">🔩</div>
-  <div class="sobre-text">
-    <div class="section-tag">Quem somos</div>
-    <div class="divider"></div>
-    <h2 class="section-title reveal">PAIXÃO<br>POR MOTOS.</h2>
-    <p>A Grau Motos nasceu da paixão genuína pelas duas rodas. Com mais de 12 anos no mercado, somos referência em mecânica especializada, atendendo desde motos urbanas até máquinas de alta performance.</p>
-    <p>Nossa equipe é formada por mecânicos certificados com treinamento em marcas como Honda, Yamaha, Kawasaki, BMW e Harley-Davidson.</p>
-    <div class="features-list">
-      <div class="feature-item">Mecânicos certificados pelas fabricantes</div>
-      <div class="feature-item">Equipamentos de diagnóstico eletrônico</div>
-      <div class="feature-item">Peças originais e de reposição de qualidade</div>
-      <div class="feature-item">Garantia em todos os serviços realizados</div>
-      <div class="feature-item">Orçamento sem compromisso</div>
-    </div>
-  </div>
-</section>
+  <div class="stripe-accent" aria-hidden="true"></div>
 
-<!-- CONTATO -->
-<section id="contato">
-  <div class="section-tag reveal">Fale com a gente</div>
-  <h2 class="section-title reveal">AGENDE SEU<br>SERVIÇO</h2>
-  <p class="reveal">Traga sua moto ou entre em contato. Estamos prontos para atender você.</p>
-  <div class="contact-grid reveal">
-    <div class="contact-card">
-      <div class="icon">📍</div>
-      <h4>Endereço</h4>
-      <p>Rua das Motos, 123<br>São Paulo, SP</p>
+  <!-- SERVIÇOS -->
+  <section id="servicos" aria-labelledby="servicos-titulo">
+    <div class="services-intro">
+      <div class="services-intro-text">
+        <div class="tag reveal">Nossos Serviços</div>
+        <h2 class="section-title reveal" id="servicos-titulo">O QUE A<br><span>GRAU MOTOS</span><br>FAZ POR VOCÊ</h2>
+        <p class="reveal">Oferecemos serviços completos de mecânica de motos, desde revisão periódica até preparação para alta performance. Cada serviço é executado com diagnóstico técnico e garantia de resultado.</p>
+      </div>
+      <a href="https://wa.me/5511937429580" target="_blank" class="btn btn-primary reveal" aria-label="Solicitar orçamento de serviço">Solicitar Orçamento →</a>
     </div>
-    <div class="contact-card">
-      <div class="icon">📞</div>
-      <h4>Telefone</h4>
-      <p>(11) 9 9999-9999</p>
+    <div class="services-grid" role="list">
+      <article class="service-card reveal" role="listitem">
+        <div class="service-card-icon" aria-hidden="true">🔧</div>
+        <h3>Revisão e Manutenção de Motos</h3>
+        <p>Revisão completa com checklist técnico detalhado. Troca de óleo, filtros, velas, correias, regulagem de válvulas e inspeção geral do estado da moto.</p>
+        <div class="service-card-tags">
+          <span class="stag">Revisão Periódica</span>
+          <span class="stag">Manutenção Preventiva</span>
+        </div>
+      </article>
+      <article class="service-card reveal" role="listitem">
+        <div class="service-card-icon" aria-hidden="true">⚡</div>
+        <h3>Elétrica para Motos</h3>
+        <p>Diagnóstico e reparo completo do sistema elétrico: injeção eletrônica, sensores, módulos, cabagem, carregamento e instalação de acessórios elétricos.</p>
+        <div class="service-card-tags">
+          <span class="stag">Diagnóstico Eletrônico</span>
+          <span class="stag">Injeção</span>
+        </div>
+      </article>
+      <article class="service-card reveal" role="listitem">
+        <div class="service-card-icon" aria-hidden="true">🏁</div>
+        <h3>Performance e Preparação</h3>
+        <p>Preparação de motor para alta performance: mapeamento, escape esportivo, kit de admissão, câmbio rápido e setup de suspensão para diferentes estilos de pilotagem.</p>
+        <div class="service-card-tags">
+          <span class="stag">Tuning</span>
+          <span class="stag">Preparação Esportiva</span>
+        </div>
+      </article>
+      <article class="service-card reveal" role="listitem">
+        <div class="service-card-icon" aria-hidden="true">🎨</div>
+        <h3>Customização de Motos</h3>
+        <p>Transforme sua moto com customização completa: faróis, para-lamas, escapamentos, guidões, assentos, carenagens e acessórios que combinam com o seu estilo.</p>
+        <div class="service-card-tags">
+          <span class="stag">Custom</span>
+          <span class="stag">Personalização</span>
+        </div>
+      </article>
+      <article class="service-card reveal" role="listitem">
+        <div class="service-card-icon" aria-hidden="true">🛞</div>
+        <h3>Pneus e Freios</h3>
+        <p>Troca e balanceamento de pneus de todas as marcas, revisão e upgrade do sistema de freios, pastilhas, discos, fluido e calibração de ABS.</p>
+        <div class="service-card-tags">
+          <span class="stag">Pneus</span>
+          <span class="stag">Freios ABS</span>
+        </div>
+      </article>
+      <article class="service-card reveal" role="listitem">
+        <div class="service-card-icon" aria-hidden="true">🔩</div>
+        <h3>Suspensão de Motos</h3>
+        <p>Regulagem, reparo e upgrade da suspensão dianteira e traseira. Revisão de amortecedores, bengalas, rolamentos e eixos para melhor controle e segurança.</p>
+        <div class="service-card-tags">
+          <span class="stag">Suspensão</span>
+          <span class="stag">Setup Esportivo</span>
+        </div>
+      </article>
     </div>
-    <div class="contact-card">
-      <div class="icon">🕐</div>
-      <h4>Horário</h4>
-      <p>Seg–Sex: 8h–18h<br>Sáb: 8h–14h</p>
-    </div>
-    <div class="contact-card">
-      <div class="icon">💬</div>
-      <h4>WhatsApp</h4>
-      <p>Atendimento rápido pelo chat</p>
-    </div>
-  </div>
-  <a href="#" class="btn-primary reveal">Chamar no WhatsApp →</a>
-</section>
+  </section>
 
-<!-- FOOTER -->
-<footer>
-  <div class="logo">GRAU <span>MOTOS</span></div>
-  <p>© 2024 Grau Motos — Todos os direitos reservados</p>
-  <div class="footer-links">
-    <a href="#servicos">Serviços</a>
-    <a href="#portfolio">Portfólio</a>
-    <a href="#contato">Contato</a>
+  <!-- PORTFÓLIO -->
+  <section id="portfolio" aria-labelledby="portfolio-titulo">
+    <div class="portfolio-head">
+      <div>
+        <div class="tag reveal">Trabalhos Realizados</div>
+        <h2 class="section-title reveal" id="portfolio-titulo" style="margin-bottom:0">PORTFÓLIO<br><span>DE SERVIÇOS</span></h2>
+      </div>
+      <div class="portfolio-filters reveal" role="group" aria-label="Filtrar portfólio">
+        <button class="filter-btn active" onclick="filterPortfolio('todos',this)">Todos</button>
+        <button class="filter-btn" onclick="filterPortfolio('performance',this)">Performance</button>
+        <button class="filter-btn" onclick="filterPortfolio('customizacao',this)">Customização</button>
+        <button class="filter-btn" onclick="filterPortfolio('revisao',this)">Revisão</button>
+        <button class="filter-btn" onclick="filterPortfolio('eletrica',this)">Elétrica</button>
+      </div>
+    </div>
+    <div class="portfolio-grid" role="list" id="portfolioGrid">
+      <article class="portfolio-card featured reveal" data-cat="performance" data-id="0" role="listitem" onclick="openPortfolio(0)" style="background:linear-gradient(135deg,#161616 0%,#1e1208 100%)">
+        <div class="portfolio-thumb" aria-hidden="true">🏍️</div>
+        <div class="portfolio-overlay">
+          <div class="portfolio-cat">Performance</div>
+          <h3>Honda CB 650R — Preparação Esportiva Completa</h3>
+          <button class="portfolio-view-btn" aria-label="Ver detalhes do projeto Honda CB 650R">Ver projeto <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button>
+        </div>
+      </article>
+      <article class="portfolio-card reveal" data-cat="revisao" data-id="1" role="listitem" onclick="openPortfolio(1)" style="background:linear-gradient(135deg,#0d1520 0%,#1a2535 100%)">
+        <div class="portfolio-thumb" aria-hidden="true">🔧</div>
+        <div class="portfolio-overlay">
+          <div class="portfolio-cat">Revisão</div>
+          <h3>Kawasaki Z400 — Revisão Completa</h3>
+          <button class="portfolio-view-btn" aria-label="Ver detalhes do projeto Kawasaki Z400">Ver projeto <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button>
+        </div>
+      </article>
+      <article class="portfolio-card reveal" data-cat="customizacao" data-id="2" role="listitem" onclick="openPortfolio(2)" style="background:linear-gradient(135deg,#140b0b 0%,#231515 100%)">
+        <div class="portfolio-thumb" aria-hidden="true">🎨</div>
+        <div class="portfolio-overlay">
+          <div class="portfolio-cat">Customização</div>
+          <h3>Honda CG 150 — Café Racer Custom</h3>
+          <button class="portfolio-view-btn" aria-label="Ver detalhes do projeto Honda CG 150 Custom">Ver projeto <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button>
+        </div>
+      </article>
+      <article class="portfolio-card reveal" data-cat="eletrica" data-id="3" role="listitem" onclick="openPortfolio(3)" style="background:linear-gradient(135deg,#0a1a0a 0%,#132513 100%)">
+        <div class="portfolio-thumb" aria-hidden="true">⚡</div>
+        <div class="portfolio-overlay">
+          <div class="portfolio-cat">Elétrica</div>
+          <h3>Yamaha MT-07 — Diagnóstico e Reforma Elétrica</h3>
+          <button class="portfolio-view-btn" aria-label="Ver detalhes do projeto Yamaha MT-07">Ver projeto <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button>
+        </div>
+      </article>
+      <article class="portfolio-card reveal" data-cat="performance" data-id="4" role="listitem" onclick="openPortfolio(4)" style="background:linear-gradient(135deg,#14091e 0%,#231530 100%)">
+        <div class="portfolio-thumb" aria-hidden="true">🏆</div>
+        <div class="portfolio-overlay">
+          <div class="portfolio-cat">Performance</div>
+          <h3>Ducati Monster 797 — Tuning de Motor</h3>
+          <button class="portfolio-view-btn" aria-label="Ver detalhes do projeto Ducati Monster 797">Ver projeto <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- SOBRE -->
+  <section id="sobre" aria-labelledby="sobre-titulo">
+    <div class="about-inner">
+      <div class="about-visual reveal left" aria-hidden="true">
+        <div class="about-visual-box">🔩
+          <div class="about-corner"></div>
+        </div>
+        <div class="about-badge">+12 ANOS<br>DE EXPERIÊNCIA</div>
+      </div>
+      <div class="about-text">
+        <div class="tag reveal">Quem Somos</div>
+        <h2 class="section-title reveal" id="sobre-titulo">OFICINA DE MOTOS<br><span>COM AUTORIDADE</span></h2>
+        <div class="divider reveal"></div>
+        <p class="reveal">A <strong>Grau Motos</strong> é uma oficina especializada em motos localizada na <strong>Avenida Victorio Fornazaro, 1431, em São Paulo</strong>. Com mais de 12 anos de atuação, somos referência em mecânica de motos, atendendo pilotos que exigem qualidade, diagnóstico preciso e resultado real.</p>
+        <p class="reveal">Nossa equipe é formada por mecânicos especializados com experiência em motos de diversas marcas e cilindradas — de motos urbanas do cotidiano até máquinas de alta performance. Trabalhamos com marcas como Honda, Yamaha, Kawasaki, BMW, Triumph, Suzuki e outras.</p>
+        <div class="about-differentials reveal">
+          <div class="diff-item">
+            <div class="diff-icon" aria-hidden="true">🛠️</div>
+            <div class="diff-text">
+              <strong>Diagnóstico Eletrônico</strong>
+              <span>Equipamentos modernos para identificar problemas com precisão</span>
+            </div>
+          </div>
+          <div class="diff-item">
+            <div class="diff-icon" aria-hidden="true">📋</div>
+            <div class="diff-text">
+              <strong>Orçamento Transparente</strong>
+              <span>Sem surpresas. Aprovação antes de qualquer execução</span>
+            </div>
+          </div>
+          <div class="diff-item">
+            <div class="diff-icon" aria-hidden="true">✅</div>
+            <div class="diff-text">
+              <strong>Garantia nos Serviços</strong>
+              <span>Garantia real em peças e mão de obra em todos os serviços</span>
+            </div>
+          </div>
+          <div class="diff-item">
+            <div class="diff-icon" aria-hidden="true">⏱️</div>
+            <div class="diff-text">
+              <strong>Prazo Cumprido</strong>
+              <span>Entregamos no prazo combinado, sempre com qualidade</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY CHOOSE US -->
+  <section class="why-section" aria-labelledby="why-titulo">
+    <div class="why-inner">
+      <div class="tag reveal">Por Que a Grau Motos</div>
+      <h2 class="section-title reveal" id="why-titulo">O QUE NOS<br><span>DIFERENCIA</span></h2>
+      <div class="why-grid">
+        <div class="why-left reveal">
+          <h3>Oficina que entende de motos de verdade</h3>
+          <p>Não somos uma borracharia que também mexe em motos. Somos uma oficina 100% especializada em motos, com foco total em qualidade e satisfação do piloto.</p>
+          <a href="https://wa.me/5511937429580" target="_blank" class="btn btn-primary" aria-label="Falar com especialista pelo WhatsApp">Falar com Especialista →</a>
+        </div>
+        <div class="why-items reveal">
+          <div class="why-item">
+            <div class="why-num" aria-hidden="true">01</div>
+            <div class="why-item-text">
+              <h4>Diagnóstico Preciso Antes de Orçar</h4>
+              <p>Antes de qualquer serviço, fazemos um diagnóstico completo da moto. Você recebe um relatório detalhado e decide o que quer fazer.</p>
+            </div>
+          </div>
+          <div class="why-item">
+            <div class="why-num" aria-hidden="true">02</div>
+            <div class="why-item-text">
+              <h4>Peças Originais e de Qualidade</h4>
+              <p>Trabalhamos apenas com peças originais ou de reposição de alta qualidade, sem atalhos que comprometam a segurança e durabilidade da sua moto.</p>
+            </div>
+          </div>
+          <div class="why-item">
+            <div class="why-num" aria-hidden="true">03</div>
+            <div class="why-item-text">
+              <h4>Atendimento Rápido e Direto</h4>
+              <p>Respeito ao seu tempo. Você entra em contato, recebe retorno rápido e acompanha todo o processo até a entrega da sua moto.</p>
+            </div>
+          </div>
+          <div class="why-item">
+            <div class="why-num" aria-hidden="true">04</div>
+            <div class="why-item-text">
+              <h4>Especialistas em Motos de Diferentes Marcas</h4>
+              <p>Atendemos motos Honda, Yamaha, Kawasaki, BMW, Triumph, Suzuki, KTM e outras. Experiência real em diferentes plataformas e motores.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTATO -->
+  <section id="contato" aria-labelledby="contato-titulo">
+    <div class="contact-inner">
+      <div class="tag reveal">Entre em Contato</div>
+      <h2 class="section-title reveal" id="contato-titulo">AGENDE SEU<br><span>SERVIÇO HOJE</span></h2>
+      <div class="contact-layout">
+        <div class="contact-info">
+          <p class="reveal">Estamos localizados na Avenida Victorio Fornazaro, 1431, em São Paulo. Entre em contato pelo WhatsApp ou ligue diretamente. Atendemos de segunda a sábado.</p>
+          <div class="contact-cards reveal" role="list">
+            <div class="contact-card" role="listitem">
+              <div class="contact-icon" aria-hidden="true">📍</div>
+              <div class="contact-card-text">
+                <strong>Endereço</strong>
+                <span>Av. Victorio Fornazaro, 1431 — São Paulo, SP</span>
+              </div>
+            </div>
+            <a href="tel:+5511937429580" class="contact-card" role="listitem" aria-label="Ligar para a Grau Motos">
+              <div class="contact-icon" aria-hidden="true">📞</div>
+              <div class="contact-card-text">
+                <strong>Telefone</strong>
+                <span>(11) 93742-9580</span>
+              </div>
+            </a>
+            <a href="https://wa.me/5511937429580" target="_blank" rel="noopener" class="contact-card" role="listitem" aria-label="Chamar no WhatsApp">
+              <div class="contact-icon" aria-hidden="true">💬</div>
+              <div class="contact-card-text">
+                <strong>WhatsApp</strong>
+                <span>(11) 93742-9580 — Atendimento rápido</span>
+              </div>
+            </a>
+            <div class="contact-card" role="listitem">
+              <div class="contact-icon" aria-hidden="true">🕐</div>
+              <div class="contact-card-text">
+                <strong>Horário de Atendimento</strong>
+                <span>Seg–Sex: 8h–18h | Sáb: 8h–14h</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="contact-cta-box reveal right">
+          <h3>SUA MOTO MERECE<br><span>CUIDADO DE VERDADE.</span></h3>
+          <p>Entre em contato agora e solicite um orçamento sem compromisso. Nossa equipe está pronta para atender você com agilidade e transparência.</p>
+          <a href="https://wa.me/5511937429580?text=Olá!%20Gostaria%20de%20solicitar%20um%20orçamento%20para%20minha%20moto." target="_blank" rel="noopener" class="btn btn-wpp" aria-label="Chamar no WhatsApp">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.168.579 4.199 1.592 5.95L.057 23.98l6.204-1.627A11.934 11.934 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.877 0-3.645-.5-5.175-1.376l-.371-.22-3.684.967.982-3.594-.24-.382A9.945 9.945 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+            Chamar no WhatsApp
+          </a>
+          <a href="tel:+5511937429580" class="btn btn-outline" aria-label="Ligar agora">
+            📞 Ligar Agora: (11) 93742-9580
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main><!-- /page-home -->
+
+
+<!-- ═══════════════════════════════════════
+     PAGE: PORTFOLIO DETAIL
+═══════════════════════════════════════ -->
+<div id="page-portfolio-detail" class="page">
+  <div id="detailContent"></div>
+</div>
+
+
+<!-- ═══ FOOTER ═══ -->
+<footer role="contentinfo">
+  <div class="footer-inner">
+    <div class="footer-logo" onclick="goHome()" aria-label="Grau Motos - ir para início">
+      <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <circle cx="8" cy="24" r="6" stroke="#E8430A" stroke-width="2.5"/>
+        <circle cx="24" cy="24" r="6" stroke="#E8430A" stroke-width="2.5"/>
+        <path d="M14 24L11 13L17 8L23 13L27 18" stroke="#E8430A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M11 13L21 13" stroke="#E8430A" stroke-width="2"/>
+      </svg>
+      GRAU <span>MOTOS</span>
+    </div>
+    <nav class="footer-links" aria-label="Links do rodapé">
+      <a href="#servicos" onclick="goHome()">Serviços</a>
+      <a href="#portfolio" onclick="goHome()">Portfólio</a>
+      <a href="#sobre" onclick="goHome()">Sobre</a>
+      <a href="#contato" onclick="goHome()">Contato</a>
+    </nav>
+    <p class="footer-copy">© 2024 Grau Motos — Av. Victorio Fornazaro, 1431 — SP</p>
   </div>
 </footer>
 
+<!-- FLOATING WPP -->
+<a href="https://wa.me/5511937429580" target="_blank" rel="noopener" class="wpp-float" aria-label="Chamar no WhatsApp">
+  <svg viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+    <path d="M12 0C5.373 0 0 5.373 0 12c0 2.168.579 4.199 1.592 5.95L.057 23.98l6.204-1.627A11.934 11.934 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.877 0-3.645-.5-5.175-1.376l-.371-.22-3.684.967.982-3.594-.24-.382A9.945 9.945 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/>
+  </svg>
+</a>
+
 <script>
-  const reveals = document.querySelectorAll('.reveal');
+// ═══════════════════════════════════
+// PORTFOLIO DATA
+// ═══════════════════════════════════
+const portfolioData = [
+  {
+    id: 0,
+    cat: "Performance",
+    catColor: "#E8430A",
+    emoji: "🏍️",
+    bg: "linear-gradient(135deg,#161616 0%,#1e1208 100%)",
+    title: "Honda CB 650R — Preparação Esportiva Completa",
+    moto: "Honda CB 650R 2022",
+    desc: "Projeto de preparação esportiva completa focado em maximizar a performance da CB 650R sem abrir mão da confiabilidade para uso diário e trackday.",
+    problema: "O proprietário buscava mais resposta do motor, melhor som e redução de peso para uso misto em estrada e pista. A moto original apresentava limitações na curva de potência e no sistema de escape.",
+    solucao: "Instalação de escape esportivo full system, reprogramação da injeção eletrônica (remap), kit de admissão de alto fluxo, ajuste de suspensão dianteira e traseira, troca de pastilhas de freio esportivas e redução de peso com remoção de componentes desnecessários.",
+    resultado: "Ganho de aproximadamente 8cv e 6Nm de torque em relação à versão original. Redução de 4,2kg no peso total. Aprovado nos testes em pista.",
+    items: ["Escape esportivo Full System Akrapovič", "Remap da injeção eletrônica", "Kit admissão K&N", "Regulagem suspensão esportiva", "Pastilhas Brembo esportivas", "Remoção de peso e limpeza de carenagem"],
+    resultNum: "+8cv", resultLabel: "de ganho de potência",
+    year: "2024",
+    related: [1, 4, 2]
+  },
+  {
+    id: 1,
+    cat: "Revisão",
+    catColor: "#3B82F6",
+    emoji: "🔧",
+    bg: "linear-gradient(135deg,#0d1520 0%,#1a2535 100%)",
+    title: "Kawasaki Z400 — Revisão Completa e Manutenção",
+    moto: "Kawasaki Z400 2021",
+    desc: "Revisão geral completa com mais de 20.000km sem manutenção. Moto apresentava sintomas de desgaste em múltiplos sistemas.",
+    problema: "A moto chegou com freios com pouca resposta, suspensão deteriorada, óleo vencido, velas desgastadas, filtro de ar entupido e sistema elétrico com falhas intermitentes.",
+    solucao: "Revisão completa do motor com troca de óleo e filtros, substituição de velas e correia de distribuição, revisão total do sistema de freios com troca de pastilhas e fluido, regulagem e revisão da suspensão, inspeção e limpeza do sistema elétrico.",
+    resultado: "Moto devolvida em condição como zero. Performance e segurança restauradas por completo. Checklist técnico com 47 itens verificados.",
+    items: ["Troca de óleo e filtro", "Substituição de velas e correia", "Revisão completa dos freios", "Novo fluido de freio DOT 4", "Limpeza e ajuste do sistema elétrico", "Regulagem da suspensão", "Calibragem dos pneus"],
+    resultNum: "47", resultLabel: "itens verificados no checklist",
+    year: "2024",
+    related: [0, 3, 4]
+  },
+  {
+    id: 2,
+    cat: "Customização",
+    catColor: "#F59E0B",
+    emoji: "🎨",
+    bg: "linear-gradient(135deg,#140b0b 0%,#231515 100%)",
+    title: "Honda CG 150 — Transformação Café Racer",
+    moto: "Honda CG 150 2018",
+    desc: "Projeto de customização completa transformando uma CG 150 convencional em um Café Racer com identidade visual e mecânica totalmente repaginadas.",
+    problema: "O proprietário queria transformar uma CG 150 do dia a dia em algo único, com personalidade de Café Racer, sem perder confiabilidade para uso urbano.",
+    solucao: "Customização estética e mecânica completa: farol redondo vintage LED, guidão baixo estilo clip-on, cúpula traseira monoposto, tanque em fibra de carbono, escape artesanal, banco de couro artesanal, pintura personalizada e revisão geral da parte mecânica.",
+    resultado: "Moto completamente transformada com identidade visual única. Aprovada em exposição de motos customizadas com menção honrosa.",
+    items: ["Farol redondo LED vintage", "Guidão clip-on estilo esportivo", "Cúpula traseira monoposto fibra", "Escape artesanal inox", "Banco de couro artesanal", "Pintura personalizada bicolor", "Revisão mecânica completa"],
+    resultNum: "100%", resultLabel: "visual transformado",
+    year: "2024",
+    related: [0, 1, 3]
+  },
+  {
+    id: 3,
+    cat: "Elétrica",
+    catColor: "#10B981",
+    emoji: "⚡",
+    bg: "linear-gradient(135deg,#0a1a0a 0%,#132513 100%)",
+    title: "Yamaha MT-07 — Diagnóstico e Reforma Elétrica Completa",
+    moto: "Yamaha MT-07 2020",
+    desc: "Diagnóstico avançado e correção completa de falhas no sistema elétrico da MT-07, com modernização dos componentes eletrônicos.",
+    problema: "A moto apresentava falhas intermitentes no painel, luz de injeção acendendo sem motivo aparente, perda de potência esporádica e problemas no sistema de carregamento da bateria.",
+    solucao: "Diagnóstico completo via scanner, identificação de sensor MAP com falha, chicote danificado por roedores, regulador de tensão defeituoso e conector oxidado. Substituição de todos os componentes, revisão do chicote elétrico, atualização do mapa da injeção.",
+    resultado: "Todas as falhas eliminadas. Sistema elétrico completamente estável. Economia de R$2.400 em relação ao orçamento do concessionário.",
+    items: ["Diagnóstico eletrônico completo via scanner", "Substituição do sensor MAP", "Reparo completo do chicote elétrico", "Novo regulador de tensão", "Limpeza e proteção de conectores", "Remap da injeção eletrônica"],
+    resultNum: "R$2.4k", resultLabel: "economizados vs concessionária",
+    year: "2023",
+    related: [0, 1, 4]
+  },
+  {
+    id: 4,
+    cat: "Performance",
+    catColor: "#E8430A",
+    emoji: "🏆",
+    bg: "linear-gradient(135deg,#14091e 0%,#231530 100%)",
+    title: "Ducati Monster 797 — Tuning e Preparação de Motor",
+    moto: "Ducati Monster 797 2019",
+    desc: "Projeto de tuning focado em extrair o máximo potencial do bicilíndrico L da Ducati Monster 797, mantendo confiabilidade para uso esportivo frequente.",
+    problema: "Piloto semiprofissional precisava de mais performance para participar de trackdays regionais. A moto original tinha potencial não explorado na curva de torque e no sistema de admissão.",
+    solucao: "Remap completo da injeção eletrônica para diferentes modos de pilotagem, escape Termignoni racing, kit de admissão racing, ajuste do quickshifter, setup de suspensão Öhlins para pista e troca do sistema de refrigeração por óleo de alta performance.",
+    resultado: "Ganho de 14cv e 11Nm de torque. Moto aprovada em 3 trackdays consecutivos sem falhas mecânicas.",
+    items: ["Remap injeção — 3 modos (Estrada, Sport, Race)", "Escape Termignoni Racing completo", "Kit admissão Racing", "Setup Quickshifter", "Suspensão Öhlins calibrada para pista", "Óleo de alta performance 10W60"],
+    resultNum: "+14cv", resultLabel: "de ganho com tuning completo",
+    year: "2023",
+    related: [0, 2, 1]
+  }
+];
+
+// ═══════════════════════════════════
+// PAGE NAVIGATION
+// ═══════════════════════════════════
+function showPage(id) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  window.scrollTo(0,0);
+}
+
+function goHome() {
+  showPage('page-home');
+  setTimeout(initReveal, 100);
+}
+
+function openPortfolio(id) {
+  const d = portfolioData[id];
+  const relatedCards = d.related.map(rid => {
+    const r = portfolioData[rid];
+    return `<div class="related-card" onclick="openPortfolio(${r.id})" style="background:${r.bg}" role="button" aria-label="Ver projeto ${r.title}">
+      <span style="position:relative;z-index:1">${r.emoji}</span>
+      <div class="overlay">
+        <h4>${r.title}</h4>
+        <span>${r.cat} · ${r.year}</span>
+      </div>
+    </div>`;
+  }).join('');
+
+  document.getElementById('detailContent').innerHTML = `
+    <div class="detail-hero">
+      <div class="detail-hero-inner">
+        <button class="detail-back" onclick="goHome()" aria-label="Voltar ao portfólio">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+          Voltar ao Portfólio
+        </button>
+        <div class="detail-hero-grid">
+          <div>
+            <div class="detail-cat">${d.cat}</div>
+            <h1>${d.title}</h1>
+            <p class="detail-desc">${d.desc}</p>
+            <div class="detail-specs" role="list">
+              <div class="spec-item" role="listitem"><strong>Moto</strong><span>${d.moto}</span></div>
+              <div class="spec-item" role="listitem"><strong>Categoria</strong><span>${d.cat}</span></div>
+              <div class="spec-item" role="listitem"><strong>Ano</strong><span>${d.year}</span></div>
+              <div class="spec-item" role="listitem"><strong>Resultado</strong><span style="color:var(--orange)">${d.resultNum}</span></div>
+            </div>
+            <a href="https://wa.me/5511937429580?text=Olá!%20Vi%20o%20projeto%20${encodeURIComponent(d.title)}%20e%20quero%20um%20orçamento." target="_blank" class="btn btn-wpp" aria-label="Solicitar orçamento similar pelo WhatsApp">📲 Quero um Serviço Similar</a>
+          </div>
+          <div class="detail-visual" aria-label="Imagem do projeto" style="background:${d.bg}" role="img">
+            <span style="font-size:100px;position:relative;z-index:1" aria-hidden="true">${d.emoji}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="detail-body">
+      <div class="detail-body-grid">
+        <div>
+          <div class="detail-section">
+            <h2>O Problema</h2>
+            <p>${d.problema}</p>
+          </div>
+          <div class="detail-section">
+            <h2>A Solução</h2>
+            <p>${d.solucao}</p>
+            <ul aria-label="Itens do serviço">
+              ${d.items.map(i => `<li>${i}</li>`).join('')}
+            </ul>
+          </div>
+          <div class="detail-result-box">
+            <h3>Resultado Final</h3>
+            <div class="detail-result-num" aria-label="Resultado: ${d.resultNum}">${d.resultNum}</div>
+            <div class="detail-result-label">${d.resultLabel}</div>
+            <p>${d.resultado}</p>
+          </div>
+        </div>
+        <div class="detail-sidebar">
+          <div class="sidebar-card">
+            <h4>Quer um serviço assim?</h4>
+            <p>Entre em contato e solicite um orçamento sem compromisso para o seu serviço.</p>
+            <a href="https://wa.me/5511937429580" target="_blank" class="btn btn-wpp" aria-label="Chamar no WhatsApp">📲 Chamar no WhatsApp</a>
+          </div>
+          <div class="sidebar-card">
+            <h4>Nosso Endereço</h4>
+            <p>Av. Victorio Fornazaro, 1431<br>São Paulo, SP</p>
+            <p style="font-family:'Barlow Condensed',sans-serif;font-size:14px;color:var(--orange)">(11) 93742-9580</p>
+            <a href="tel:+5511937429580" class="btn btn-outline" aria-label="Ligar agora">📞 Ligar Agora</a>
+          </div>
+          <div class="sidebar-card">
+            <h4>Horário</h4>
+            <p>Seg–Sex: 8h às 18h<br>Sáb: 8h às 14h</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="related-works">
+      <h2>Outros Projetos</h2>
+      <div class="related-grid" role="list">${relatedCards}</div>
+    </div>
+  `;
+
+  showPage('page-portfolio-detail');
+}
+
+// ═══════════════════════════════════
+// FILTER
+// ═══════════════════════════════════
+function filterPortfolio(cat, btn) {
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.portfolio-card').forEach(card => {
+    if (cat === 'todos' || card.dataset.cat === cat) {
+      card.style.display = '';
+    } else {
+      card.style.display = 'none';
+    }
+  });
+}
+
+// ═══════════════════════════════════
+// SCROLL REVEAL
+// ═══════════════════════════════════
+function initReveal() {
+  const els = document.querySelectorAll('#page-home .reveal');
   const obs = new IntersectionObserver((entries) => {
     entries.forEach((e, i) => {
       if (e.isIntersecting) {
-        setTimeout(() => e.target.classList.add('visible'), i * 80);
+        setTimeout(() => e.target.classList.add('visible'), i * 90);
+        obs.unobserve(e.target);
       }
     });
-  }, { threshold: 0.1 });
-  reveals.forEach(el => obs.observe(el));
+  }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+  els.forEach(el => obs.observe(el));
+}
+initReveal();
 
-  document.querySelectorAll('.filter-tab').forEach(btn => {
-    btn.addEventListener('click', () => {
-      document.querySelectorAll('.filter-tab').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-    });
+// ═══════════════════════════════════
+// MOBILE MENU
+// ═══════════════════════════════════
+function toggleMenu() {
+  const nav = document.getElementById('navMobile');
+  const btn = document.querySelector('.hamburger');
+  const isOpen = nav.classList.toggle('open');
+  btn.setAttribute('aria-expanded', isOpen);
+  document.body.style.overflow = isOpen ? 'hidden' : '';
+}
+
+// ═══════════════════════════════════
+// SMOOTH ANCHOR + CLOSE MENU
+// ═══════════════════════════════════
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    const target = document.querySelector(a.getAttribute('href'));
+    if (target) {
+      e.preventDefault();
+      const navH = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--nav-h'));
+      const top = target.getBoundingClientRect().top + window.scrollY - navH;
+      window.scrollTo({ top, behavior: 'smooth' });
+    }
   });
+});
+
+// ═══════════════════════════════════
+// NAV SCROLL SHADOW
+// ═══════════════════════════════════
+window.addEventListener('scroll', () => {
+  const nav = document.querySelector('.nav');
+  if (window.scrollY > 60) {
+    nav.style.background = 'rgba(8,8,8,0.98)';
+    nav.style.borderBottomColor = 'rgba(232,67,10,0.15)';
+  } else {
+    nav.style.background = 'rgba(8,8,8,0.92)';
+    nav.style.borderBottomColor = 'rgba(255,255,255,0.07)';
+  }
+}, { passive: true });
 </script>
 </body>
 </html>
