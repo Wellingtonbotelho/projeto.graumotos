@@ -1,0 +1,9 @@
+# robots.txt — Grau Motos
+# https://graumotoss.com.br/
+
+# Permitir todos os robôs de busca
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://graumotoss.com.br/sitemap.xml
